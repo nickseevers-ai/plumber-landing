@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Never Lose Another Quote to Slow Response Time</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero .subheadline {
+            font-size: 24px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: #ffd700;
+        }
+        
+        .stat-label {
+            font-size: 16px;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .form-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .form-header h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .form-header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+        
+        .form-content {
+            padding: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .benefits {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .benefit {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .benefit-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .benefit h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .benefit p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .trust {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .trust p {
+            font-size: 14px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .success-icon {
+            font-size: 80px;
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+        
+        .success-message h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .success-message p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero .subheadline {
+                font-size: 18px;
+            }
+            
+            .stats {
+                gap: 30px;
+            }
+            
+            .stat-number {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Stop Losing Quotes to Slow Response Time</h1>
+        <p class="subheadline">Respond in 60 seconds instead of 2 hours. Close 50% more jobs.</p>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">5 sec</div>
+                <div class="stat-label">Average Response Time</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">65%</div>
+                <div class="stat-label">Quote Acceptance Rate</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Always Available</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="benefits">
+        <div class="benefit">
+            <div class="benefit-icon">⚡</div>
+            <h3>Instant Response</h3>
+            <p>Customer fills form, you get SMS in 5 seconds with all their info. No more missed leads.</p>
+        </div>
+        
+        <div class="benefit">
+            <div class="benefit-icon">💰</div>
+            <h3>Close More Jobs</h3>
+            <p>Respond 100x faster than competitors. Speed = sales. Stop losing to whoever replies first.</p>
+        </div>
+        
+        <div class="benefit">
+            <div class="benefit-icon">📱</div>
+            <h3>Text-Based Quoting</h3>
+            <p>Get request via SMS. Text back quote. Customer accepts. Done. All from your phone.</p>
+        </div>
+        
+        <div class="benefit">
+            <div class="benefit-icon">🤖</div>
+            <h3>AI Quote Option</h3>
+            <p>Upgrade to AI quotes: Customer gets instant pricing in 5 seconds. No waiting for you.</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="form-header">
+            <h2>🔧 See a Live Demo</h2>
+            <p>Fill out this form to see exactly what your customers will experience</p>
+        </div>
+        
+        <div class="form-content">
+            <form id="demoForm">
+                <div class="form-group">
+                    <label>Your Business Name</label>
+                    <input type="text" id="business" name="business" required placeholder="Joe's Plumbing">
+                </div>
+                
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Joe Smith">
+                </div>
+                
+                <div class="form-group">
+                    <label>Your Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="(916) 555-1234">
+                </div>
+                
+                <div class="form-group">
+                    <label>Your Email</label>
+                    <input type="email" id="email" name="email" required placeholder="joe@joesplumbing.com">
+                </div>
+                
+                <div class="form-group">
+                    <label>How many quote requests do you get per week?</label>
+                    <select id="volume" name="volume" required>
+                        <option value="">Select...</option>
+                        <option value="1-10">1-10 per week</option>
+                        <option value="10-25">10-25 per week</option>
+                        <option value="25-50">25-50 per week</option>
+                        <option value="50+">50+ per week</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Do you use flat-rate pricing?</label>
+                    <select id="flat_rate" name="flat_rate" required>
+                        <option value="">Select...</option>
+                        <option value="yes">Yes - I have a price book</option>
+                        <option value="no">No - I quote custom</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    🚀 Show Me the Demo
+                </button>
+            </form>
+            
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">✅</div>
+                <h2>Thanks! Here's Your Demo</h2>
+                <p>
+                    <strong>This is exactly what your customers will see.</strong><br><br>
+                    Try filling it out as if you were a customer needing plumbing help.<br><br>
+                    I'll call you within 24 hours to show you what happens on your end when a customer submits this form.<br><br>
+                    <a href="https://plumber-quotes-tal2.vercel.app/" style="color: #667eea; font-weight: 600; font-size: 18px;">👉 Click Here to Try the Customer Form</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="trust">
+        <p><strong>30-Day Free Trial</strong> • No Credit Card Required • Cancel Anytime</p>
+        <p style="margin-top: 20px;">Sacramento based. Built specifically for local plumbers who are tired of losing quotes to slow response times.</p>
+    </div>
+
+    <script>
+        document.getElementById('demoForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.textContent = '📤 Sending...';
+            
+            // Gather form data
+            const formData = {
+                business: document.getElementById('business').value,
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                volume: document.getElementById('volume').value,
+                flat_rate: document.getElementById('flat_rate').value,
+                timestamp: new Date().toISOString(),
+                type: 'plumber_lead'
+            };
+            
+            console.log('Plumber lead captured:', formData);
+            
+            // TODO: Send to your backend/Google Sheets/Airtable
+            // For now, just log it and show success
+            
+            // In production, you'd do:
+            // await fetch('YOUR_BACKEND_URL/capture-lead', {
+            //     method: 'POST',
+            //     headers: {'Content-Type': 'application/json'},
+            //     body: JSON.stringify(formData)
+            // });
+            
+            // Show success message
+            document.getElementById('demoForm').style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+        });
+    </script>
+</body>
+</html>
